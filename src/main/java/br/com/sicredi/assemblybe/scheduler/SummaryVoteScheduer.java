@@ -1,4 +1,4 @@
-package br.com.sicredi.assemblybe.scheduled;
+package br.com.sicredi.assemblybe.scheduler;
 
 
 import java.time.LocalDate;
@@ -14,15 +14,15 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
-public class SummaryVoteSchedued {
+public class SummaryVoteScheduer {
 	
     @Autowired
     private SummaryVoteService service;  
 
-    @Scheduled(cron="${SCHEDULED_CRON}")
+     @Scheduled(cron="${SCHEDULED_CRON}")
      public void doIt() {
-    	log.info(":: SummaryVoteSchedued.doIt() Start :: "+ LocalDate.now() + " :: "+ LocalTime.now());        
+    	log.info(":: SummaryVoteScheduer.doIt() Start :: "+ LocalDate.now() + " :: "+ LocalTime.now());        
         this.service.summarize();        
-        log.info(":: SummaryVoteSchedued.doIt() End :: "+ LocalDateTime.now());
+        log.info(":: SummaryVoteScheduer.doIt() End :: "+ LocalDateTime.now());
     }
 }

@@ -29,7 +29,6 @@ public class SummaryVoteService {
 	
 	public void summarize() {		
 		
-		
 		Optional<List<Agenda>> agendas = this.agendaRepository.findByDateCountingIsNull();
 		
 		if (agendas.isEmpty() || CollectionUtils.isEmpty(agendas.get())) {
@@ -54,26 +53,26 @@ public class SummaryVoteService {
 			Optional<Agenda> agendaOptional = this.agendaRepository.findById(agenda.getId());
 			
 			long qtdVoteTotal = 0;
+			
+			agendaOptional.get().setNVoteTotal(0L);
+			agendaOptional.get().setNVoteTotal(0L);
+			
 			for (Object[] obj : summary) {
 				
 				String voteStatus = String.valueOf(obj[0]);
-				Long qtd = Long.parseLong(String.valueOf(obj[1]));
-
+				long qtd = Long.parseLong(String.valueOf(obj[1]));
+				
 				if (voteStatus.equalsIgnoreCase(AssemblyConstant.YES)) {
 					agendaOptional.get().setSVoteTotal(qtd);
 				} else {
 					agendaOptional.get().setNVoteTotal(qtd);
-				}
-				
+				}				
 				qtdVoteTotal += qtd;
-			}
-				
+			}				
 			agendaOptional.get().setQtdVoteTotal(qtdVoteTotal);
 			agendaOptional.get().setDateCounting(LocalDateTime.now());
 			
-			this.agendaRepository.saveAndFlush(agendaOptional.get());
-			
-				
-			});
+			this.agendaRepository.saveAndFlush(agendaOptional.get());					
+		});
 	}	
 }
