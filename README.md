@@ -5,10 +5,12 @@
      
 - 2- Swagger
       http://localhost:8080/sicredi/assembly/v1/swagger-ui.html#/
+      
       http://sicredi-332322.rj.r.appspot.com/sicredi/assembly/v1/swagger-ui.html#/
 
 - 3- Install database MySQL
 	  https://dev.mysql.com/downloads/installer/
+	  
 	  Looking file application-local.properties to get name of database and user and password
 	
 - 4- Execute the scripts in path bellow
