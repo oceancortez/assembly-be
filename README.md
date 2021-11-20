@@ -1,18 +1,20 @@
 # assembly-be
 
 - 1- Clone the project
-
+		
+	  Java 8	
       https://github.com/oceancortez/assembly-be
      
 - 2- Swagger
 
-      http://localhost:8080/sicredi/assembly/v1/swagger-ui.html#/
+	  Local: http://localhost:8080/sicredi/assembly/v1/swagger-ui.html#/
       
-      http://sicredi-332322.rj.r.appspot.com/sicredi/assembly/v1/swagger-ui.html#/
+      prod: https://sicredi-332620.rj.r.appspot.com/sicredi/assembly/v1/swagger-ui.html#/
 
 - 3- Install database MySQL
-
-	  https://dev.mysql.com/downloads/installer/
+      
+      Verison: 8.0.12 / PHP 8.0.12s
+	  https://www.apachefriends.org/download.html
 	  
 	  Looking file application-local.properties to get name of database and user and password
 	
