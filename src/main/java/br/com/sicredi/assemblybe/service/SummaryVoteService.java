@@ -31,14 +31,14 @@ public class SummaryVoteService {
 		
 		Optional<List<Agenda>> agendas = this.agendaRepository.findByDateCountingIsNull();
 		
-		if (agendas.isEmpty() || CollectionUtils.isEmpty(agendas.get())) {
+		if (!agendas.isPresent() || CollectionUtils.isEmpty(agendas.get())) {
 			return;
 		}
 		
 		agendas.get().forEach(agenda -> {
 			
 			Optional<Session> session = this.sessionRepository.findByAgendaId(agenda.getId());			
-			if (session.isEmpty()) {
+			if (!session.isPresent()) {
 				return;
 			}			
 		

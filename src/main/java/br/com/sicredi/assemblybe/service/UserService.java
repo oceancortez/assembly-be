@@ -44,7 +44,7 @@ public class UserService {
 		
 		 Optional<User> userOptional = this.userRepository.findByTaxId(taxId);	
 		 
-		 if (userOptional.isEmpty()) {
+		 if (!userOptional.isPresent()) {
 			validate(taxId);		
 			
 			User user = User.builder().taxId(taxId).dateCreated(LocalDateTime.now()).build();

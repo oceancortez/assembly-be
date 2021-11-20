@@ -49,7 +49,7 @@ public class SessionService {
 		
 		Optional<List<Session>> openSessions = this.sessionRepository.getOpenSessions();
 		
-		if (openSessions.isEmpty() || CollectionUtils.isEmpty(openSessions.get())) {
+		if (!openSessions.isPresent() || CollectionUtils.isEmpty(openSessions.get())) {
 			throw new BusinessException(AssemblyConstant.MSG_SESSION_NOT_FOUND);
 		}
 		

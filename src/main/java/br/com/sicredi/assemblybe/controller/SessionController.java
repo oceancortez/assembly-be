@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.sicredi.assemblybe.exception.BusinessException;
 import br.com.sicredi.assemblybe.exception.NotFoundException;
 import br.com.sicredi.assemblybe.model.Session;
+import br.com.sicredi.assemblybe.request.SessionRequest;
 import br.com.sicredi.assemblybe.service.SessionService;
 
 @RestController
@@ -22,12 +23,13 @@ public class SessionController {
 	private SessionService sessionService;
 	
 	@PostMapping(path = "session")
-	public ResponseEntity<?> create(@Valid @RequestBody Session session) throws BusinessException {		
+	public ResponseEntity<?> create(@Valid @RequestBody SessionRequest sessionRequest) throws BusinessException {	
+		Session session = Session.builder().agendaId(sessionRequest.getAgendaId()).minutes(sessionRequest.getMinutes()).build();
 		return new ResponseEntity<>(this.sessionService.create(session), HttpStatus.CREATED);
 	}
 	
 	@GetMapping(path = "sessions/open")
-	public ResponseEntity<?> getBalanceCheckingAccount() throws NotFoundException, BusinessException {
+	public ResponseEntity<?> getSessionsOpen() throws NotFoundException, BusinessException {
 		return ResponseEntity.ok(this.sessionService.getOpenSessions());
 	}
 

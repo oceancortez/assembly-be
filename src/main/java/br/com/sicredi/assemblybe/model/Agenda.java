@@ -8,9 +8,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
+import br.com.sicredi.assemblybe.constant.AssemblyConstant;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Data
 @Entity
 @Table
@@ -20,8 +28,11 @@ public class Agenda implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;	
+	private Long id;
+	
+	@NotNull(message = AssemblyConstant.MSG_NOT_NULL)
 	private String name;	
+	
 	private LocalDateTime dateCreated;
 	private Long sVoteTotal;
 	private Long nVoteTotal;

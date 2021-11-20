@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.sicredi.assemblybe.constant.AssemblyConstant;
-import br.com.sicredi.assemblybe.dto.VoteDTO;
 import br.com.sicredi.assemblybe.exception.BusinessException;
 import br.com.sicredi.assemblybe.exception.NotFoundException;
 import br.com.sicredi.assemblybe.model.User;
 import br.com.sicredi.assemblybe.model.Vote;
 import br.com.sicredi.assemblybe.model.VotePK;
 import br.com.sicredi.assemblybe.repository.VoteRepository;
+import br.com.sicredi.assemblybe.request.VoteRequest;
 
 @Service
 public class VoteService {
@@ -27,14 +27,14 @@ public class VoteService {
 	@Autowired
 	private UserService userService;
 	
-	public void vote(VoteDTO voteDTO) throws BusinessException, NotFoundException {		
+	public void vote(VoteRequest voteRequest) throws BusinessException, NotFoundException {		
 		
-		User user = this.userService.getUserByTaxId(voteDTO.getUserTaxId());
+		User user = this.userService.getUserByTaxId(voteRequest.getUserTaxId());
 			
-		this.sessionService.getActiveSession(voteDTO.getSessionId(), voteDTO.getAgendaId());
+		this.sessionService.getActiveSession(voteRequest.getSessionId(), voteRequest.getAgendaId());
 			
 		
-		VotePK votePK = VotePK.builder().sessionId(voteDTO.getSessionId()).agendaId(voteDTO.getAgendaId())
+		VotePK votePK = VotePK.builder().sessionId(voteRequest.getSessionId()).agendaId(voteRequest.getAgendaId())
 				.userId(user.getId()).build();
 		
 		
@@ -47,7 +47,7 @@ public class VoteService {
 		Vote vote = Vote.builder()
 				.votePK(votePK)
 				.voteDate(LocalDateTime.now())
-				.voteStatus(voteDTO.getVoteStatus())
+				.voteStatus(voteRequest.getVoteStatus())
 				.build();					
 			
 		this.voteRepository.save(vote);
