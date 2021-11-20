@@ -11,6 +11,7 @@ public class AssemblyConstant {
 	public static final String MSG_SESSION_MINUTE = "O valor deve ser maior igual 1";
 	
 	public static final String YES = "S";
+	public static final String NO = "N";
 	public static final String MSG_AGENDA_ALREADY_EXISTS = "Já existe uma pauta com esse nome, favor cadastrar com outro nome";
 	public static final String MSG_AGENDA_NOT_FOUND = "Agenda id:%s não cadastrada";
 	public static final String MSG_SESSION_ALREADY_EXISTS = "Já existe uma sessão cadastrar com essa pauta, favor criar uma nova pauta";

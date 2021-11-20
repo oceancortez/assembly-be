@@ -11,10 +11,7 @@ import br.com.sicredi.assemblybe.model.VotePK;
 
 @Repository
 public interface VoteRepository extends JpaRepository<Vote, VotePK> {
-
 	
-	
-	@Query(value = " select vote_status as voteStatus, v.count as qtd from (select vote_status, count(*) as count from vote WHERE agenda_id = :agendaId group by vote_status) v group by v.count order by qtd "
-			, nativeQuery = true)
-	List<Object[]> getSummarizeByAgendaId(Long agendaId);
+	@Query(value = " select v from Vote v where v.id.agendaId = :agendaId ")
+	List<Vote> getVotesByAgendaId(Long agendaId);
 }

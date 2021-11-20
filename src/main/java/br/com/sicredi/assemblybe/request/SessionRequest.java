@@ -16,8 +16,7 @@ public class SessionRequest implements Serializable{
 	@NotNull(message = AssemblyConstant.MSG_NOT_NULL)
 	@Min(value = 1, message = AssemblyConstant.MSG_SESSION_MINUTE)
 	private Long agendaId;
-	
-	@NotNull(message = AssemblyConstant.MSG_NOT_NULL)
+
 	@Min(value = 1, message = AssemblyConstant.MSG_SESSION_MINUTE)
 	private Integer minutes;
 

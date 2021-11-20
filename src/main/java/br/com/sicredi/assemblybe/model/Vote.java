@@ -24,7 +24,7 @@ public class Vote implements Serializable{
 	private static final long serialVersionUID = 1761680612202087260L;
 	
 	@EmbeddedId
-	private VotePK votePK;	
+	private VotePK id;	
 	private String voteStatus;	
 	private LocalDateTime voteDate;	
 

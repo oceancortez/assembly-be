@@ -11,6 +11,7 @@ import org.springframework.util.CollectionUtils;
 import br.com.sicredi.assemblybe.constant.AssemblyConstant;
 import br.com.sicredi.assemblybe.model.Agenda;
 import br.com.sicredi.assemblybe.model.Session;
+import br.com.sicredi.assemblybe.model.Vote;
 import br.com.sicredi.assemblybe.repository.AgendaRepository;
 import br.com.sicredi.assemblybe.repository.SessionRepository;
 import br.com.sicredi.assemblybe.repository.VoteRepository;
@@ -49,30 +50,24 @@ public class SummaryVoteService {
 				return;
 			}	
 
-			List<Object[]> summary = this.voteRepository.getSummarizeByAgendaId(agenda.getId());			
+			List<Vote> votes = this.voteRepository.getVotesByAgendaId(agenda.getId());						
+			
+			Long countYes = votes.stream()
+					  .filter(f -> f.getVoteStatus().equalsIgnoreCase(AssemblyConstant.YES)).count();
+			
+			Long countNo = votes.stream()
+					  .filter(f -> f.getVoteStatus().equalsIgnoreCase(AssemblyConstant.NO)).count();
+
 			Optional<Agenda> agendaOptional = this.agendaRepository.findById(agenda.getId());
 			
-			long qtdVoteTotal = 0;
-			
-			agendaOptional.get().setNVoteTotal(0L);
-			agendaOptional.get().setNVoteTotal(0L);
-			
-			for (Object[] obj : summary) {
-				
-				String voteStatus = String.valueOf(obj[0]);
-				long qtd = Long.parseLong(String.valueOf(obj[1]));
-				
-				if (voteStatus.equalsIgnoreCase(AssemblyConstant.YES)) {
-					agendaOptional.get().setSVoteTotal(qtd);
-				} else {
-					agendaOptional.get().setNVoteTotal(qtd);
-				}				
-				qtdVoteTotal += qtd;
-			}				
-			agendaOptional.get().setQtdVoteTotal(qtdVoteTotal);
+			agendaOptional.get().setSVoteTotal(countYes);
+			agendaOptional.get().setNVoteTotal(countNo);
+							
+			agendaOptional.get().setQtdVoteTotal(countYes + countNo);
 			agendaOptional.get().setDateCounting(LocalDateTime.now());
 			
-			this.agendaRepository.saveAndFlush(agendaOptional.get());					
+			this.agendaRepository.saveAndFlush(agendaOptional.get());	
+		
 		});
 	}	
 }

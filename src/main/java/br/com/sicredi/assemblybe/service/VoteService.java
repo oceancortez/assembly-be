@@ -45,7 +45,7 @@ public class VoteService {
 		}
 		
 		Vote vote = Vote.builder()
-				.votePK(votePK)
+				.id(votePK)
 				.voteDate(LocalDateTime.now())
 				.voteStatus(voteRequest.getVoteStatus())
 				.build();					
