@@ -41,13 +41,15 @@ public class SessionService {
 	}
 	
 	public Session getActiveSession(Long sessionId, Long agendaId) throws NotFoundException {
-		Optional<Session> activeSession = this.sessionRepository.getActiveSession(sessionId, agendaId);
+		Optional<Session> activeSession = 
+				this.sessionRepository.getActiveSession(sessionId, agendaId, LocalDateTime.now());
 		return activeSession.orElseThrow(() -> new NotFoundException(AssemblyConstant.MSG_SESSION_WAS_CLOSED));
 	}
 
 	public List<Session> getOpenSessions() throws BusinessException {
 		
-		Optional<List<Session>> openSessions = this.sessionRepository.getOpenSessions();
+		Optional<List<Session>> openSessions = 
+				this.sessionRepository.getOpenSessions(LocalDateTime.now());
 		
 		if (!openSessions.isPresent() || CollectionUtils.isEmpty(openSessions.get())) {
 			throw new BusinessException(AssemblyConstant.MSG_SESSION_NOT_FOUND);

@@ -44,7 +44,7 @@ public class SummaryVoteService {
 			}			
 		
 			Optional<Session> activeSession = 
-					this.sessionRepository.getActiveSession(session.get().getId(), agenda.getId());
+					this.sessionRepository.getActiveSession(session.get().getId(), agenda.getId(), LocalDateTime.now());
 		
 			if (activeSession.isPresent()) {
 				return;
