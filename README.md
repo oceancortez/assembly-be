@@ -3,7 +3,7 @@
 - 1- Clone the project
 		
 	  Java 8	
-      https://github.com/oceancortez/assembly-be
+      https://github.com/oceancortez/assembly-be.git
       
 - 2- Install dependency lombok in your IDEA to run in debug mode
 	
