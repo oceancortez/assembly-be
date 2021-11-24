@@ -9,7 +9,7 @@ CREATE TABLE `omc`.`agenda` (
   `qtd_vote_total` INT,
   `date_counting` DATETIME NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE);
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC) );
 
 
 
@@ -18,7 +18,7 @@ CREATE TABLE `omc`.`agenda` (
   `tax_id` VARCHAR(11) NOT NULL,
   `date_created` DATETIME NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `tax_id_UNIQUE` (`tax_id` ASC) VISIBLE);
+  UNIQUE INDEX `tax_id_UNIQUE` (`tax_id` ASC) );
 
 CREATE TABLE `omc`.`session` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -26,8 +26,8 @@ CREATE TABLE `omc`.`session` (
   `opening_date` DATETIME NOT NULL,
   `closing_date` DATETIME NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `agenda_id_UNIQUE` (`agenda_id` ASC) VISIBLE,
-  INDEX `fk_agenda_id_idx` (`agenda_id` ASC) VISIBLE,
+  UNIQUE INDEX `agenda_id_UNIQUE` (`agenda_id` ASC) ,
+  INDEX `fk_agenda_id_idx` (`agenda_id` ASC) ,
   CONSTRAINT `fk_agenda_id`
     FOREIGN KEY (`agenda_id`)
     REFERENCES `omc`.`agenda` (`id`)
@@ -42,8 +42,8 @@ CREATE TABLE `omc`.`session` (
   `vote_status` ENUM('S', 'N') NOT NULL,
   `vote_date` DATETIME NOT NULL,
   PRIMARY KEY (`session_id`, `agenda_id`, `user_id`),
-  INDEX `fk_agenda_id_idx` (`agenda_id` ASC) VISIBLE,
-  INDEX `fk_user_id_idx` (`user_id` ASC) VISIBLE,
+  INDEX `fk_agenda_id_idx` (`agenda_id` ASC) ,
+  INDEX `fk_user_id_idx` (`user_id` ASC) ,
   CONSTRAINT `fk_session_id`
     FOREIGN KEY (`session_id`)
     REFERENCES `omc`.`session` (`id`)
